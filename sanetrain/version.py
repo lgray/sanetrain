@@ -1,6 +1,6 @@
-# BSD 3-Clause License
-#
-# Copyright (c) 2018, Fermilab
+#!/usr/bin/env python
+
+# Copyright (c) 2020, Fermilab
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,3 +27,11 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import re
+
+__version__ = "0.0.1.dev0"
+version = __version__
+version_info = tuple(re.split(r"[-\.]", __version__))
+
+del re
