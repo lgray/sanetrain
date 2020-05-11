@@ -55,7 +55,7 @@ def get_description():
     return description[start:stop].strip()  # before + + after
 
 
-INSTALL_REQUIRES = ['pytorch>=1.5.0']
+INSTALL_REQUIRES = ['yaml', 'torch>=1.5.0', 'torch_geometric>=1.4.0']
 EXTRAS_REQUIRE = {}
 
 setup(name="sanetrain",
