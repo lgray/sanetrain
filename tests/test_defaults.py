@@ -58,6 +58,7 @@ def generate_training(fname):
 
     training_script = templates.main_loop.format(**config)
 
-    print(training_script)
+    with open('test_default_training.py','w+') as f:
+        f.write(training_script)
 
 generate_training('test_model.yaml')
