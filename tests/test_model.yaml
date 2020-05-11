@@ -1,0 +1,57 @@
+epochs: 200
+
+define_datasets: |-
+  import os.path as osp
+  from torch_geometric.data import DataLoader
+  from torch_geometric.datasets import Planetoid
+  import torch_geometric.transforms as T
+  dataset = 'Cora'
+  path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data', dataset)
+  train_dataset = Planetoid(path, dataset, T.NormalizeFeatures())
+  test_dataset = Planetoid(path, dataset, T.NormalizeFeatures())
+
+train_loader_params:
+  batch_size: 64
+  shuffle: True
+
+test_loader_params:
+  batch_size: 64
+  shuffle: False
+
+data_unpacker: |-
+  def data_unpacker(data):
+      return {'x': data.x, 'edge_index': data.edge_index}, data.y
+
+loss_function: F.nll_loss
+
+model_spec:
+    import: |-
+      from test_model import Net
+    name: Net
+model_params:
+  num_features: train_dataset.num_features
+  num_classes: train_dataset.num_classes
+
+optimizer: torch.optim.Adam
+optimizer_params:
+  lr: 0.005
+  weight_decay: 5e-4
+
+training_spec:
+  train_epoch:
+    definition: default
+    logits_mask: |-
+      'train_mask'
+  train_step:
+    definition: default
+  
+testing_spec:
+  test_epoch:
+    definition: default
+    logits_mask: |-
+      'test_mask'
+  test_step:
+    definition: default
+    
+display_spec:
+  definition: default

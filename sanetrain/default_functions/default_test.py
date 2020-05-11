@@ -2,7 +2,7 @@ from ..device import device
 
 
 def test_epoch(model, lossf, test_loader, data_unpacker,
-               epoch=None, device=device, **kwargs):
+               test_step, epoch=None, device=device, **kwargs):
     '''Default function for testing one epoch of data'''
     model.eval()
     total = 0.
@@ -11,8 +11,9 @@ def test_epoch(model, lossf, test_loader, data_unpacker,
     mask = kwargs.pop('logits_mask', None)
     for data in test_loader:
         model_args, truth = data_unpacker(data)
+        data_mask = None if mask is None else data[mask]
         size, correct, loss = test_step(model, lossf, truth,
-                                        mask=mask, device=device,
+                                        mask=data_mask, device=device,
                                         **model_args)
         total += size
         total_correct += correct

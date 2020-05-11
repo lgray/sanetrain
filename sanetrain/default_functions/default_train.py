@@ -2,15 +2,16 @@ from ..device import device
 
 
 def train_epoch(optimizer, model, lossf, train_loader, data_unpacker,
-                epoch=None, device=device, **kwargs):
+                train_step, epoch=None, device=device, **kwargs):
     '''Default function for training one epoch of data'''
     model.train()
     total_loss = 0.
     mask = kwargs.pop('logits_mask', None)
     for data in train_loader:
         model_args, truth = data_unpacker(data)
+        data_mask = None if mask is None else data[mask]
         total_loss += train_step(optimizer, model, lossf,
-                                 truth, mask=mask, device=device,
+                                 truth, mask=data_mask, device=device,
                                  **model_args)
     return total_loss
 
