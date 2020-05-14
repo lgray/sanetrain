@@ -9,7 +9,7 @@ A flexible package for defining repeatable machine learning workflows.
 
 sanetrain is a package that uniformizes the process of creating machine learning
 training workflows in a declarative way, so that all ingredients and specificities
-of a specific machine learning model can be tracked cleanly in github and inferfaces
+of a specific machine learning model can be tracked cleanly in github and interfaces
 with many modern training infrastructure frameworks. The main problem that this package
 intends to solve is to support easy organization of a codebase into a functioning
 training pipeline, and make it so this training pipeline is easily repeatable by others.
