@@ -1,0 +1,16 @@
+name: sanetrain
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pip=19.3.1=py37_0
+  - pytest
+  - pyyaml
+  - pytorch>=1.5.0
+  - pip:
+    - mlflow
+    - torch-geometric>=1.4.0
+    - https://pytorch-geometric.com/whl/torch-1.5.0/torch_sparse-latest%2Bcu102-cp37-cp37m-linux_x86_64.whl
+
