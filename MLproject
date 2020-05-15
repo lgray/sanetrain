@@ -1,0 +1,9 @@
+name: Sanetrain Test
+
+conda_env: environment.yaml
+
+entry_points:
+  train:
+    command: "PYTHONPATH=$(pwd):$PYTHONPATH python sanetrain.py \
+                --file tests/test_model.yaml
+                "

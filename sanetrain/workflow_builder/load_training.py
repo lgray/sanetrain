@@ -1,10 +1,9 @@
 import yaml
 
 from ..default_functions import simple_defaults
-from . import templates
 
 
-def generate_training(fname, defaults=simple_defaults):
+def generate_training(main_loop, fname, defaults=simple_defaults):
     config = None
     with open(fname) as f:
         config = yaml.load(f, Loader=yaml.SafeLoader)
@@ -49,7 +48,7 @@ def generate_training(fname, defaults=simple_defaults):
     if config['display_stats'] == 'default':
         config['display_stats'] = defaults['display_stats']
 
-    training_script = templates.main_loop.format(**config)
+    training_script = main_loop.format(**config)
     
     print('training_script ->', type(training_script), training_script)
 
