@@ -1,6 +1,7 @@
 main_loop = '''import sanetrain
 import mlflow
 import mlflow.pytorch
+import os.path
 
 import torch
 import torch.nn
@@ -13,6 +14,8 @@ device = sanetrain.device.device
 {data_unpacker}
 
 with mlflow.start_run() as run:
+    mlflow.log_artifact(os.path.realpath(__file__), "script")
+
     train_loader = DataLoader(train_dataset, {train_loader_params})
     test_loader = DataLoader(test_dataset, {test_loader_params})
     
