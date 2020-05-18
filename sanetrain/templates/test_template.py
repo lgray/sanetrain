@@ -1,4 +1,4 @@
-main_loop = '''import sanetrain
+import sanetrain
 import torch
 import torch.nn
 import torch.nn.functional as F
@@ -39,4 +39,4 @@ for epoch in range(1, {{ epochs }} + 1):
                             {{ test_kwargs }})
 
     display_stats(**test_stats)
-'''
+
