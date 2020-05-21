@@ -1,14 +1,9 @@
 import yaml
 
 from ..default_functions import simple_defaults
-from . import templates
 
 
-def generate_training(fname, defaults=simple_defaults):
-    config = None
-    with open(fname) as f:
-        config = yaml.load(f, Loader=yaml.SafeLoader)
-    
+def generate_training(template, config, defaults=simple_defaults):
     train_loader_params = config.pop('train_loader_params', {})
     config['train_loader_params'] = ', '.join(['%s=%s'%(k, v) for k, v in train_loader_params.items()])
     test_loader_params = config.pop('test_loader_params', {})
@@ -49,8 +44,5 @@ def generate_training(fname, defaults=simple_defaults):
     if config['display_stats'] == 'default':
         config['display_stats'] = defaults['display_stats']
 
-    training_script = templates.main_loop.format(**config)
-    
-    print('training_script ->', type(training_script), training_script)
-
-    return training_script
+    print(template.render(config))
+    return template.render(config)

@@ -1,0 +1,12 @@
+name: Sanetrain Test
+
+conda_env: environment.yaml
+
+entry_points:
+  train:
+    parameters:
+        epochs: {type: int, default:200}
+    command: "PYTHONPATH=$(pwd):$PYTHONPATH python sanetrain.py \
+                --file tests/test_model.yaml
+                --epochs {epochs}
+                "
